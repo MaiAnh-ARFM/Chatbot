@@ -2,10 +2,19 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+// Phục vụ các file tĩnh (HTML, CSS, JS) từ thư mục gốc
+app.use(express.static(__dirname));
+
+// Định tuyến để hiển thị file TLA_TTKT.html khi truy cập trang chính
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'TLA_TTKT.html'));
+});
 
 // ⚠️ Thay bằng API KEY và BOT ID thật của bạn
 const API_KEY = "GWLsotSpgmipXz7NaM3SM_-Qdn1uK9zS9phvZVUzFMo";  
@@ -32,7 +41,6 @@ app.post("/chat", async (req, res) => {
       }
     );
 
-    // Lấy phản hồi bot
     const reply =
       response.data.choices?.[0]?.message?.content ||
       "Không có phản hồi từ bot.";
@@ -43,14 +51,10 @@ app.post("/chat", async (req, res) => {
     res.json({ reply: "Có lỗi xảy ra khi gọi bot." });
   }
 });
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'TLA_TTKT.html'));
-});
 // Start server
-app.listen(3000, () => {
-  console.log("🚀 Server chạy tại http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server chạy trên port ${PORT}`);
 });
 
