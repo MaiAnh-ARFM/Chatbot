@@ -43,8 +43,14 @@ app.post("/chat", async (req, res) => {
     res.json({ reply: "Có lỗi xảy ra khi gọi bot." });
   }
 });
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'TLA_TTKT.html'));
+});
 // Start server
 app.listen(3000, () => {
   console.log("🚀 Server chạy tại http://localhost:3000");
 });
+
