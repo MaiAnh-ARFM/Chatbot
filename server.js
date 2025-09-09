@@ -5,11 +5,12 @@ const cors = require("cors");
 const path = require('path');
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(cors());
 
 // Phục vụ các file tĩnh (HTML, CSS, JS) từ thư mục gốc
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname)));
 
 // Định tuyến để hiển thị file TLA_TTKT.html khi truy cập trang chính
 app.get('/', (req, res) => {
@@ -17,13 +18,13 @@ app.get('/', (req, res) => {
 });
 
 // ⚠️ Thay bằng API KEY và BOT ID thật của bạn
-const API_KEY = "GWLsotSpgmipXz7NaM3SM_-Qdn1uK9zS9phvZVUzFMo";  
-const BOT_ID = "7538361057372028946";    
+const API_KEY = process.env.API_KEY;  
+const BOT_ID = process.env.BOT_ID;    
 
 // Endpoint chat
 app.post("/chat", async (req, res) => {
   const message = req.body.message;
-
+  
   try {
     const response = await axios.post(
      "https://api.coze.com/open_api/v3/chat/completions",
