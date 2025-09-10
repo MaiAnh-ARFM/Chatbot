@@ -24,7 +24,7 @@ app.post("/chat", async (req, res) => {
   
   try {
     const response = await axios.post(
-     "https://api.coze.com/open_api/v2/chat/completions",
+     "https://api.coze.com/v3/chat",
       {
         bot_id: BOT_ID,
         user_id: "user_" + Date.now(),
@@ -55,6 +55,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server chạy trên port ${PORT}`);
 });
+
 
 
 
