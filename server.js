@@ -3,15 +3,12 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 const cors = require("cors");
 const path = require('path');
-
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-
 // Phục vụ các file tĩnh (HTML, CSS, JS) từ thư mục gốc
-app.use(express.static(path.join(__dirname)));
-
+app.use(express.static(__dirname));
 // Định tuyến để hiển thị file TLA_TTKT.html khi truy cập trang chính
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'TLA_TTKT.html'));
@@ -58,4 +55,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server chạy trên port ${PORT}`);
 });
+
 
