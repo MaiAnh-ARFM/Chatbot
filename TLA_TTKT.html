@@ -1,188 +1,182 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: #f5f7fa;
-    }
-    header {
-      background: #0a4da3;
-      color: white;
-      padding: 40px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .chat-container {
-      width: 100%;
-      height: 540px;
-      background: url('LogoTTKT.jpg') no-repeat center center;
-	  background-size: contain;
-      position: relative;
-      border-radius: 5px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-container::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255, 255, 255, 0.7);
-      z-index: 1;
-    }
-    .messages-box {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      position: relative;
-      z-index: 2;
-    }
-    .message {
-      margin: 8px 0;
-      padding: 10px 14px;
-      border-radius: 12px;
-      max-width: 75%;
-      line-height: 1.4;
-      font-weight: 500;
-    }
-    .user {
-      background: none;        /* bỏ nền */
-      color: #000;             /* chữ đen */
-      align-self: flex-end;    /* căn sang phải */
-      margin-left: auto;
-      padding: 6px 12px;       /* tạo khoảng cách */
-      text-align: right;       /* chữ canh phải */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ lý ảo hỗ trợ tra cứu nội bộ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
 
-    .bot {
-      background: none;        /* bỏ nền */
-      color: #000;             /* chữ đen */
-      align-self: flex-start;  /* căn sang trái */
-      margin-right: auto;
-      padding: 6px 12px;       /* tạo khoảng cách */
-      text-align: left;        /* chữ canh trái */
-    }
-    .input-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-      background: #ffffff;
-      border-top: 1px solid #ccc;
-      z-index: 2;
-      position: relative;
-    }
-    .input-container input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      outline: none;
-      font-size: 14px;
-      margin-right: 10px;
-      background: #eef4ff;
-    }
-    .input-container button {
-      background: #2f7afc;
-      border: none;
-      color: white;
-      font-size: 16px;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .input-container button:hover {
-      background: #1c5ed6;
-    }
-	main {
-      padding: 10px 30px;   /* trên dưới 20px, trái phải 40px */
-      text-align: left;     /* giữ chữ căn trái */
-    }
-    main p {
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1.6;
-	  margin-bottom: 8px;  /* khoảng cách giữa các dòng */
-    }
-  </style>
+        .chat-container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 70vh;
+        }
+
+        .chat-header {
+            background-color: #004d99;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .messages-box {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            max-width: 70%;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #e6f2ff;
+            align-self: flex-end;
+            text-align: right;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background-color: #f1f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            position: relative;
+        }
+        
+        .bot-message:before {
+            content: "🤖";
+            position: absolute;
+            left: -30px;
+            top: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .chat-input button {
+            background-color: #004d99;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s;
+        }
+
+        .chat-input button:hover {
+            background-color: #003366;
+        }
+    </style>
 </head>
-
 <body>
-  <header>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ</header>
-  <main>
-    <p>Xin chào 👋, tôi là Trợ lý ảo hỗ trợ bạn tra cứu văn bản pháp luật, quy chuẩn kỹ thuật và FAQ của Trung tâm Kỹ thuật.</p>
-    <p>Tôi có thể giúp gì cho bạn ?</p>
-  </main>
 
-  <!-- Khung chat -->
-  <div class="chat-container">
-	
-    <div class="messages-box" id="messages"></div>
-    <div class="chat-input">
-  <input type="text" id="inputBox" placeholder="Nhập câu hỏi của bạn...">
-      <button id="sendBtn">➤ Gửi</button>
+<div class="chat-container">
+    <div class="chat-header">
+        TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ
     </div>
-  </div>
+    <div class="messages-box" id="messages">
+        <div class="message bot-message">
+            Xin chào 👋, tôi là Trợ lý ảo hỗ trợ bạn tra cứu văn bản pháp luật, quy chuẩn kỹ thuật và FAQ của Trung tâm Kỹ thuật.
+            Tôi có thể giúp gì cho bạn ?
+        </div>
+        <div class="logo-placeholder">
+            <img src="/LogoTTKT.jpg" alt="Logo TTKT">
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
+        <button id="sendBtn">Gửi</button>
+    </div>
+</div>
 
-  <script>
+<script>
     const inputBox = document.getElementById("chatInput");
-	  inputBox.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-});
     const sendButton = document.getElementById("sendBtn");
-	sendButton.addEventListener("click", sendMessage);
     const messagesBox = document.getElementById("messages");
 
-    function addMessage(content, sender = "user") {
-      const msg = document.createElement("div");
-      msg.textContent = content;
-      msg.classList.add("message", sender);
-      messagesBox.appendChild(msg);
-      messagesBox.scrollTop = messagesBox.scrollHeight;
+    function addMessage(content, sender) {
+        const msg = document.createElement("div");
+        msg.textContent = content;
+        msg.classList.add("message");
+        msg.classList.add(`${sender}-message`);
+        messagesBox.appendChild(msg);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
     async function sendToServer(message) {
-      try {
-    const res = await fetch("/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-         });
-        const data = await res.json();
-        addMessage(data.reply || "⚠️ Bot không trả lời.", "bot");
-      } catch (err) {
-        console.error(err);
-        addMessage("❌ Lỗi kết nối server", "bot");
-      }
+        try {
+            const res = await fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+            });
+            const data = await res.json();
+            addMessage(data.reply || "Bot không trả lời.", "bot");
+        } catch (error) {
+            console.error(error);
+            addMessage("❌ Lỗi kết nối server", "bot");
+        }
     }
 
     function sendMessage() {
-      const message = inputBox.value.trim();
-      if (message) {
-        addMessage(message, "user");
-        inputBox.value = "";
-        sendToServer(message);
-      }
+        const message = inputBox.value.trim();
+        if (message) {
+            addMessage(message, "user");
+            inputBox.value = "";
+            sendToServer(message);
+        }
     }
 
-    inputBox.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        sendMessage();
-      }
+    // Gắn sự kiện cho nút "Gửi" khi click
+    sendButton.addEventListener("click", sendMessage);
+
+    // Gắn sự kiện cho ô nhập khi bấm phím Enter
+    inputBox.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
     });
 
-    sendButton.addEventListener("click", sendMessage);
-  </script>
+</script>
 </body>
 </html>
