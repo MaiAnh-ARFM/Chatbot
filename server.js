@@ -46,5 +46,7 @@ app.post("/chat", async (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  module.exports = app;
   console.log(`Server chạy trên port ${PORT}`);
 });
+
