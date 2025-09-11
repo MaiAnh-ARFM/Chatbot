@@ -42,7 +42,9 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            position: relative; /* Thêm position relative cho messages-box */
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
         }
 
         .message {
@@ -75,34 +77,25 @@
             top: 5px;
         }
 
-        /* Định nghĩa style cho logo-placeholder để nó nằm giữa và phía dưới các tin nhắn đầu */
         .logo-placeholder {
-            flex-grow: 1; /* Cho phép nó giãn nở để đẩy nội dung khác lên */
+            flex-grow: 1;
             display: flex;
             justify-content: center;
-            align-items: center; /* Căn giữa logo theo chiều dọc */
-            opacity: 0.3; /* Làm mờ logo */
-            pointer-events: none; /* Không cho phép tương tác với logo */
-            position: absolute; /* Đặt vị trí tuyệt đối */
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0; /* Đảm bảo logo nằm dưới các tin nhắn */
+            align-items: center;
+            width: 100%;
+            pointer-events: none;
         }
 
         .logo-placeholder img {
-            max-width: 50%; /* Giảm kích thước logo */
+            max-width: 50%;
             height: auto;
-            display: block;
+            opacity: 0.3;
         }
 
         .chat-input {
             display: flex;
             padding: 15px;
             border-top: 1px solid #e0e0e0;
-            position: relative; /* Thêm position relative */
-            z-index: 1; /* Đảm bảo ô input nằm trên logo nếu có tin nhắn */
         }
 
         .chat-input input {
@@ -142,7 +135,7 @@
             Xin chào 👋, tôi là Trợ lý ảo hỗ trợ bạn tra cứu văn bản pháp luật, quy chuẩn kỹ thuật và FAQ của Trung tâm Kỹ thuật.
             Tôi có thể giúp gì cho bạn ?
         </div>
-        <div class="logo-placeholder">
+        <div class="logo-placeholder" id="logoPlaceholder">
             <img src="/LogoTTKT.jpg" alt="Logo TTKT">
         </div>
     </div>
@@ -156,12 +149,11 @@
     const inputBox = document.getElementById("chatInput");
     const sendButton = document.getElementById("sendBtn");
     const messagesBox = document.getElementById("messages");
+    const logoPlaceholder = document.getElementById("logoPlaceholder");
 
     function addMessage(content, sender) {
-        // Xóa logo khi có tin nhắn mới
-        const logoPlaceholder = document.querySelector('.logo-placeholder');
         if (logoPlaceholder) {
-            logoPlaceholder.style.display = 'none'; // Ẩn logo
+            logoPlaceholder.style.display = 'none'; // Ẩn logo khi có tin nhắn mới
         }
 
         const msg = document.createElement("div");
@@ -185,7 +177,7 @@
             addMessage(data.reply || "Bot không trả lời.", "bot");
         } catch (error) {
             console.error(error);
-            addMessage("❌ Có lỗi xảy ra khi gọi bot.", "bot"); // Sửa lại thông báo lỗi
+            addMessage("❌ Có lỗi xảy ra khi gọi bot.", "bot");
         }
     }
 
@@ -198,10 +190,8 @@
         }
     }
 
-    // Gắn sự kiện cho nút "Gửi" khi click
     sendButton.addEventListener("click", sendMessage);
 
-    // Gắn sự kiện cho ô nhập khi bấm phím Enter
     inputBox.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             sendMessage();
