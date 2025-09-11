@@ -147,11 +147,11 @@
 
     async function sendToServer(message) {
       try {
-        const res = await fetch("https://chatbot-ttkt.onrender.com/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
-        });
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+         });
         const data = await res.json();
         addMessage(data.reply || "⚠️ Bot không trả lời.", "bot");
       } catch (err) {
