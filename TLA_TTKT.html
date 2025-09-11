@@ -42,8 +42,6 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
             position: relative;
         }
 
@@ -77,6 +75,7 @@
             top: 5px;
         }
 
+        /* Định nghĩa style cho logo-placeholder để nó nằm giữa và phía dưới các tin nhắn đầu */
         .logo-placeholder {
             flex-grow: 1;
             display: flex;
@@ -84,6 +83,12 @@
             align-items: center;
             width: 100%;
             pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
         }
 
         .logo-placeholder img {
@@ -96,6 +101,8 @@
             display: flex;
             padding: 15px;
             border-top: 1px solid #e0e0e0;
+            position: relative;
+            z-index: 1;
         }
 
         .chat-input input {
@@ -153,7 +160,7 @@
 
     function addMessage(content, sender) {
         if (logoPlaceholder) {
-            logoPlaceholder.style.display = 'none'; // Ẩn logo khi có tin nhắn mới
+            logoPlaceholder.style.display = 'none';
         }
 
         const msg = document.createElement("div");
