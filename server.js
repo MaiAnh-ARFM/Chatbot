@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// Phục vụ các file tĩnh
+// Phục vụ các file tĩnh từ thư mục gốc
 app.use(express.static(__dirname));
 
 // Dùng để hiển thị file HTML khi truy cập trang chính
@@ -21,10 +21,11 @@ app.post("/chat", async (req, res) => {
   const message = req.body.message;
   try {
     const response = await axios.post(
-      "https://api.coze.com/open_api/v3/chat",
+      "https://api.coze.com/open_api/v3/chat", 
       {
         bot_id: process.env.BOT_ID,
-        user_id: "user_" + Date.now(),
+        conversation_id: "user_" + Date.now(),
+        user: "user_" + Date.now(),
         query: message,
         stream: false
       },
@@ -46,7 +47,7 @@ app.post("/chat", async (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  module.exports = app;
   console.log(`Server chạy trên port ${PORT}`);
 });
 
+module.exports = app;
