@@ -42,6 +42,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            position: relative; /* Thêm position relative cho messages-box */
         }
 
         .message {
@@ -74,10 +75,34 @@
             top: 5px;
         }
 
+        /* Định nghĩa style cho logo-placeholder để nó nằm giữa và phía dưới các tin nhắn đầu */
+        .logo-placeholder {
+            flex-grow: 1; /* Cho phép nó giãn nở để đẩy nội dung khác lên */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Căn giữa logo theo chiều dọc */
+            opacity: 0.3; /* Làm mờ logo */
+            pointer-events: none; /* Không cho phép tương tác với logo */
+            position: absolute; /* Đặt vị trí tuyệt đối */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0; /* Đảm bảo logo nằm dưới các tin nhắn */
+        }
+
+        .logo-placeholder img {
+            max-width: 50%; /* Giảm kích thước logo */
+            height: auto;
+            display: block;
+        }
+
         .chat-input {
             display: flex;
             padding: 15px;
             border-top: 1px solid #e0e0e0;
+            position: relative; /* Thêm position relative */
+            z-index: 1; /* Đảm bảo ô input nằm trên logo nếu có tin nhắn */
         }
 
         .chat-input input {
@@ -133,6 +158,12 @@
     const messagesBox = document.getElementById("messages");
 
     function addMessage(content, sender) {
+        // Xóa logo khi có tin nhắn mới
+        const logoPlaceholder = document.querySelector('.logo-placeholder');
+        if (logoPlaceholder) {
+            logoPlaceholder.style.display = 'none'; // Ẩn logo
+        }
+
         const msg = document.createElement("div");
         msg.textContent = content;
         msg.classList.add("message");
@@ -154,7 +185,7 @@
             addMessage(data.reply || "Bot không trả lời.", "bot");
         } catch (error) {
             console.error(error);
-            addMessage("❌ Lỗi kết nối server", "bot");
+            addMessage("❌ Có lỗi xảy ra khi gọi bot.", "bot"); // Sửa lại thông báo lỗi
         }
     }
 
