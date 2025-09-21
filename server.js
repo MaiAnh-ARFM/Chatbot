@@ -18,15 +18,15 @@ app.get('/', (req, res) => {
 
 // Endpoint chat
 app.post("/chat", async (req, res) => {
-  const message = req.body.message;
+  const userMessage = req.body.message;
   try {
     const response = await axios.post(
-      "https://api.coze.com/open_api/v3/chat", 
+      "https://api.coze.com/open_api/v2/chat", 
       {
         bot_id: process.env.BOT_ID,
         conversation_id: "user_" + Date.now(),
         user: "user_" + Date.now(),
-        query: message,
+        query: userMessage,
         stream: false
       },
       {
@@ -36,8 +36,8 @@ app.post("/chat", async (req, res) => {
         }
       }
     );
-    const reply = response.data.choices?.[0]?.message?.content || "Bot không trả lời.";
-    res.json({ reply });
+    const botReply = response.data.messages.find(msg => msg.type === 'answer')?.content || "Bot không trả lời.";
+    res.json({ reply: botReply });
   } catch (error) {
     console.error("Lỗi Coze API:", error.response?.data || error.message);
     res.status(500).json({ reply: "Có lỗi xảy ra khi gọi bot." });
@@ -45,9 +45,5 @@ app.post("/chat", async (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server chạy trên port ${PORT}`);
-});
-
 module.exports = app;
+
