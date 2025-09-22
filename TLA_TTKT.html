@@ -39,50 +39,37 @@
       z-index: 1;
     }
     .messages-box {
-  flex: 1;
-  padding: 20px 10px; /* Tăng khoảng đệm */
-  overflow-y: auto;
-  position: relative;
-  z-index: 2;
-  
-  /* Bổ sung quan trọng: Thiết lập sắp xếp linh hoạt */
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Tạo khoảng cách giữa các tin nhắn */
-}
-   .message {
-  padding: 10px 15px;
-  border-radius: 18px; /* Bo tròn góc */
-  max-width: 75%; /* Giới hạn độ rộng của tin nhắn */
-  line-height: 1.5;
-  font-weight: 500;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Thêm bóng mờ nhẹ */
-}
-   .user {
-  /* Căn lề cho toàn bộ bong bóng chat sang phải */
-  align-self: flex-end; 
-  margin-left: auto;
-  
-  /* Căn lề cho chữ bên trong sang phải */
-  text-align: right; 
-  
-  /* Màu sắc cho tin nhắn của người dùng */
-  background: #007bff; /* Màu xanh dương */
-  color: white;
-}
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      position: relative;
+      z-index: 2;
+    }
+    .message {
+      margin: 8px 0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      max-width: 75%;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .user {
+      background: none;        /* bỏ nền */
+      color: #000;             /* chữ đen */
+      align-self: flex-end;    /* căn sang phải */
+      margin-left: auto;
+      padding: 6px 12px;       /* tạo khoảng cách */
+      text-align: right;       /* chữ canh phải */
+    }
 
-   .bot {
-  /* Căn lề cho toàn bộ bong bóng chat sang trái */
-  align-self: flex-start; 
-  margin-right: auto;
-  
-  /* Căn lề cho chữ bên trong sang trái */
-  text-align: left; 
-  
-  /* Màu sắc cho tin nhắn của bot */
-  background: #e9e9eb; /* Màu xám nhạt */
-  color: #000;
-}
+    .bot {
+      background: none;        /* bỏ nền */
+      color: #000;             /* chữ đen */
+      align-self: flex-start;  /* căn sang trái */
+      margin-right: auto;
+      padding: 6px 12px;       /* tạo khoảng cách */
+      text-align: left;        /* chữ canh trái */
+    }
     .input-container {
       display: flex;
       align-items: center;
@@ -130,7 +117,7 @@
 </head>
 
 <body>
-  <header>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ</header>
+<header>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ</header>
   <main>
     <p>Xin chào 👋, tôi là Trợ lý ảo hỗ trợ bạn tra cứu văn bản pháp luật, quy chuẩn kỹ thuật và FAQ của Trung tâm Kỹ thuật.</p>
     <p>Tôi có thể giúp gì cho bạn ?</p>
