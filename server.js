@@ -37,6 +37,7 @@ app.post("/chat", async (req, res) => {
       }
     );
     const botReply = response.data.messages.find(msg => msg.type === 'answer')?.content || "Bot không trả lời.";
+    console.log(`Hỏi: "${userMessage}" | Đáp: "${botReply}"`);
     res.json({ reply: botReply });
   } catch (error) {
     console.error("Lỗi Coze API:", error.response?.data || error.message);
@@ -46,4 +47,5 @@ app.post("/chat", async (req, res) => {
 
 // Start server
 module.exports = app;
+
 
