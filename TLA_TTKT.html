@@ -114,11 +114,34 @@
       line-height: 1.6;
 	  margin-bottom: 8px;  /* khoảng cách giữa các dòng */
     }
+	  /* --- BẮT ĐẦU PHẦN THÊM MỚI --- */
+	  #newChatBtn {
+    /* Vị trí và khoảng cách */
+    display: block; /* Hiển thị trên một dòng riêng */
+    margin: 15px auto 0; /* Căn giữa và tạo khoảng cách với tiêu đề */
+    /* Giao diện */
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a4da3; /* Màu chữ giống màu nền header */
+    background-color: #ffffff; /* Nền trắng */
+    border: 1px solid #ffffff; /* Viền trắng */
+    border-radius: 20px; /* Bo tròn góc */
+    cursor: pointer; /* Biểu tượng con trỏ chuột */
+    /* Hiệu ứng */
+    transition: all 0.2s ease-in-out;
+  }
+  #newChatBtn:hover {
+    background-color: #eef4ff; /* Hơi đổi màu khi di chuột qua */
+  }
+	  /* --- KẾT THÚC PHẦN THÊM MỚI --- */
   </style>
 </head>
 
 <body>
-<header>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ</header>
+<header>TRỢ LÝ ẢO HỖ TRỢ TRA CỨU NỘI BỘ
+	<button id="newChatBtn">Hội thoại mới</button>
+</header>
   <main>
     <p>Xin chào 👋, tôi là Trợ lý ảo hỗ trợ bạn tra cứu văn bản pháp luật, quy chuẩn kỹ thuật và FAQ của Trung tâm Kỹ thuật.</p>
     <p>Tôi có thể giúp gì cho bạn ?</p>
@@ -134,6 +157,11 @@
   </div>
 
   <script>
+	const newChatButton = document.getElementById("newChatBtn");
+    newChatButton.addEventListener("click", function () {
+      // Dòng này có chức năng y hệt F5
+      location.reload();
+    });
     const inputBox = document.getElementById("chatInput");
     const sendButton = document.getElementById("sendBtn");
     const messagesBox = document.getElementById("messages");
